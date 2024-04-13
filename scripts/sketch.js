@@ -372,33 +372,33 @@ function loadMap() {
 
 // Load all sounds
 function loadSounds() {
-    sounds = {};
-    
+       sounds = {};
+    //soundFormats('wav');
     // Missile explosion
-    // sounds.boom = loadSound ('...sounds/boom.wav');
-    // sounds.boom.setVolume(0.3);
-    // // Missile launch
-    // sounds.missile = loadSound('sounds/missile.wav');
+    sounds.boom = new Audio('sounds/boom.wav'); // loadSound('sounds/boom.wav');
+    //sounds.boom.setVolume(0.3);
+    // Missile launch
+    sounds.missile = new Audio('sounds/missile.wav');// loadSound('sounds/missile.wav');
     // sounds.missile.setVolume(0.3);
 
-    // // Enemy death
-    // sounds.pop = loadSound('sounds/pop.wav');
+    // Enemy death
+     sounds.pop = new Audio('sounds/pop.wav');// loadSound('sounds/pop.wav');
     // sounds.pop.setVolume(0.4);
 
-    // // Railgun
-    // sounds.railgun = loadSound('sounds/railgun.wav');
+    // Railgun
+     sounds.railgun = new Audio('sounds/railgun.wav'); //loadSound('sounds/railgun.wav');
     // sounds.railgun.setVolume(0.3);
 
-    // // Sniper rifle shot
-    // sounds.sniper = loadSound('sounds/sniper.wav');
+    // Sniper rifle shot
+     sounds.sniper = new Audio('sounds/sniper.wav');// loadSound('sounds/sniper.wav');
     // sounds.sniper.setVolume(0.2);
 
-    // // Tesla coil
-    // sounds.spark = loadSound('sounds/spark.wav');
+    // Tesla coil
+    sounds.spark = new Audio('sounds/spark.wav');// loadSound('sounds/spark.wav');
     // sounds.spark.setVolume(0.3);
 
-    // // Taunt enemy death
-    // sounds.taunt = loadSound('sounds/taunt.wav');
+    // Taunt enemy death
+    sounds.taunt = new Audio('sounds/taunt.wav'); //loadSound('sounds/taunt.wav');
     // sounds.taunt.setVolume(0.3);
 }
 
