@@ -280,7 +280,7 @@ function loadMap() {
     var name = document.getElementById('map').value;
 
     health = 40;
-    cash = 55;
+    cash = 5500;
     
     if (name === 'custom' && custom) {
         // Grids
@@ -372,7 +372,7 @@ function loadMap() {
 
 // Load all sounds
 function loadSounds() {
-       sounds = {};
+    sounds = {};
     //soundFormats('wav');
     // Missile explosion
     sounds.boom = new Audio('sounds/boom.wav'); // loadSound('sounds/boom.wav');
@@ -488,101 +488,103 @@ function randomTile() {
 function randomWave() {
     var waves = [];
 
-    if (isWave(0, 3)) {
+    if (isWave(0, 2)) {
         waves.push([40, ['weak', 50]]);
     }
-    if (isWave(2, 4)) {
-        waves.push([20, ['weak', 25]]);
-    }
-    if (isWave(2, 7)) {
-        waves.push([30, ['weak', 25], ['strong', 25]]);
+    if (isWave(0, 3)) {
         waves.push([20, ['strong', 25]]);
     }
-    if (isWave(3, 7)) {
-        waves.push([40, ['fast', 25]]);
+    if (isWave(0, 3)) {
+        waves.push([30, ['fast', 25]]);
     }
-    if (isWave(4, 14)) {
-        waves.push([20, ['fast', 50]]);
+    if (isWave(0, 3)) {
+        waves.push([30, ['tank', 25]]);
     }
-    if (isWave(5, 6)) {
-        waves.push([20, ['strong', 50], ['fast', 25]]);
-    }
-    if (isWave(8, 12)) {
-        waves.push([20, ['medic', 'strong', 'strong', 25]]);
-    }
-    if (isWave(10, 13)) {
-        waves.push([20, ['medic', 'strong', 'strong', 50]]);
-        waves.push([30, ['medic', 'strong', 'strong', 50], ['fast', 50]]);
-        waves.push([5, ['fast', 50]]);
-    }
-    if (isWave(12, 16)) {
-        waves.push([20, ['medic', 'strong', 'strong', 50], ['strongFast', 50]]);
-        waves.push([10, ['strong', 50], ['strongFast', 50]]);
-        waves.push([10, ['medic', 'strongFast', 50]]);
-        waves.push([10, ['strong', 25], ['stronger', 25], ['strongFast', 50]]);
-        waves.push([10, ['strong', 25], ['medic', 25], ['strongFast', 50]]);
-        waves.push([20, ['medic', 'stronger', 'stronger', 50]]);
-        waves.push([10, ['medic', 'stronger', 'strong', 50]]);
-        waves.push([10, ['medic', 'strong', 50], ['medic', 'strongFast', 50]]);
-        waves.push([5, ['strongFast', 100]]);
-        waves.push([20, ['stronger', 50]]);
-    }
-    if (isWave(13, 20)) {
-        waves.push([40, ['tank', 'stronger', 'stronger', 'stronger', 10]]);
-        waves.push([10, ['medic', 'stronger', 'stronger', 50]]);
-        waves.push([40, ['tank', 25]]);
-        waves.push([20, ['tank', 'stronger', 'stronger', 50]]);
-        waves.push([20, ['tank', 'medic', 50], ['strongFast', 25]]);
-    }
-    if (isWave(14, 20)) {
-        waves.push([20, ['tank', 'stronger', 'stronger', 50]]);
-        waves.push([20, ['tank', 'medic', 'medic', 50]]);
-        waves.push([20, ['tank', 'medic', 50], ['strongFast', 25]]);
-        waves.push([10, ['tank', 50], ['strongFast', 25]]);
-        waves.push([10, ['faster', 50]]);
-        waves.push([20, ['tank', 50], ['faster', 25]]);
-    }
-    if (isWave(17, 25)) {
-        waves.push([20, ['taunt', 'stronger', 'stronger', 'stronger', 25]]);
-        waves.push([20, ['spawner', 'stronger', 'stronger', 'stronger', 25]]);
-        waves.push([20, ['taunt', 'tank', 'tank', 'tank', 25]]);
-        waves.push([40, ['taunt', 'tank', 'tank', 'tank', 25]]);
-    }
-    if (isWave(19)) {
-        waves.push([20, ['spawner', 1], ['tank', 20], ['stronger', 25]]);
-        waves.push([20, ['spawner', 1], ['faster', 25]]);
-    }
-    if (isWave(23)) {
-        waves.push([20, ['taunt', 'medic', 'tank', 25]]);
-        waves.push([20, ['spawner', 2], ['taunt', 'medic', 'tank', 25]]);
-        waves.push([10, ['spawner', 1], ['faster', 100]]);
-        waves.push([5, ['faster', 100]]);
-        waves.push([
-            20, ['tank', 100], ['faster', 50],
-            ['taunt', 'tank', 'tank', 'tank', 50]
-        ]);
-        waves.push([
-            10, ['taunt', 'stronger', 'tank', 'stronger', 50],
-            ['faster', 50]
-        ]);
-    }
-    if (isWave(25)) {
-        waves.push([5, ['taunt', 'medic', 'tank', 50], ['faster', 50]]);
-        waves.push([5, ['taunt', 'faster', 'faster', 'faster', 50]]);
-        waves.push([
-            10, ['taunt', 'tank', 'tank', 'tank', 50],
-            ['faster', 50]
-        ]);
-    }
-    if (isWave(30)) {
-        waves.push([5, ['taunt', 'faster', 'faster', 'faster', 50]]);
-        waves.push([5, ['taunt', 'tank', 'tank', 'tank', 50]]);
-        waves.push([5, ['taunt', 'medic', 'tank', 'tank', 50]]);
-        waves.push([1, ['faster', 200]]);
-    }
-    if (isWave(35)) {
-        waves.push([0, ['taunt', 'faster', 200]]);
-    }
+    // if (isWave(3, 7)) {
+    //     waves.push([40, ['fast', 25]]);
+    // }
+    // if (isWave(4, 14)) {
+    //     waves.push([20, ['fast', 50]]);
+    // }
+    // if (isWave(5, 6)) {
+    //     waves.push([20, ['strong', 50], ['fast', 25]]);
+    // }
+    // if (isWave(8, 12)) {
+    //     waves.push([20, ['medic', 'strong', 'strong', 25]]);
+    // }
+    // if (isWave(10, 13)) {
+    //     waves.push([20, ['medic', 'strong', 'strong', 50]]);
+    //     waves.push([30, ['medic', 'strong', 'strong', 50], ['fast', 50]]);
+    //     waves.push([5, ['fast', 50]]);
+    // }
+    // if (isWave(12, 16)) {
+    //     waves.push([20, ['medic', 'strong', 'strong', 50], ['strongFast', 50]]);
+    //     waves.push([10, ['strong', 50], ['strongFast', 50]]);
+    //     waves.push([10, ['medic', 'strongFast', 50]]);
+    //     waves.push([10, ['strong', 25], ['stronger', 25], ['strongFast', 50]]);
+    //     waves.push([10, ['strong', 25], ['medic', 25], ['strongFast', 50]]);
+    //     waves.push([20, ['medic', 'stronger', 'stronger', 50]]);
+    //     waves.push([10, ['medic', 'stronger', 'strong', 50]]);
+    //     waves.push([10, ['medic', 'strong', 50], ['medic', 'strongFast', 50]]);
+    //     waves.push([5, ['strongFast', 100]]);
+    //     waves.push([20, ['stronger', 50]]);
+    // }
+    // if (isWave(13, 20)) {
+    //     waves.push([40, ['tank', 'stronger', 'stronger', 'stronger', 10]]);
+    //     waves.push([10, ['medic', 'stronger', 'stronger', 50]]);
+    //     waves.push([40, ['tank', 25]]);
+    //     waves.push([20, ['tank', 'stronger', 'stronger', 50]]);
+    //     waves.push([20, ['tank', 'medic', 50], ['strongFast', 25]]);
+    // }
+    // if (isWave(14, 20)) {
+    //     waves.push([20, ['tank', 'stronger', 'stronger', 50]]);
+    //     waves.push([20, ['tank', 'medic', 'medic', 50]]);
+    //     waves.push([20, ['tank', 'medic', 50], ['strongFast', 25]]);
+    //     waves.push([10, ['tank', 50], ['strongFast', 25]]);
+    //     waves.push([10, ['faster', 50]]);
+    //     waves.push([20, ['tank', 50], ['faster', 25]]);
+    // }
+    // if (isWave(17, 25)) {
+    //     waves.push([20, ['taunt', 'stronger', 'stronger', 'stronger', 25]]);
+    //     waves.push([20, ['spawner', 'stronger', 'stronger', 'stronger', 25]]);
+    //     waves.push([20, ['taunt', 'tank', 'tank', 'tank', 25]]);
+    //     waves.push([40, ['taunt', 'tank', 'tank', 'tank', 25]]);
+    // }
+    // if (isWave(19)) {
+    //     waves.push([20, ['spawner', 1], ['tank', 20], ['stronger', 25]]);
+    //     waves.push([20, ['spawner', 1], ['faster', 25]]);
+    // }
+    // if (isWave(23)) {
+    //     waves.push([20, ['taunt', 'medic', 'tank', 25]]);
+    //     waves.push([20, ['spawner', 2], ['taunt', 'medic', 'tank', 25]]);
+    //     waves.push([10, ['spawner', 1], ['faster', 100]]);
+    //     waves.push([5, ['faster', 100]]);
+    //     waves.push([
+    //         20, ['tank', 100], ['faster', 50],
+    //         ['taunt', 'tank', 'tank', 'tank', 50]
+    //     ]);
+    //     waves.push([
+    //         10, ['taunt', 'stronger', 'tank', 'stronger', 50],
+    //         ['faster', 50]
+    //     ]);
+    // }
+    // if (isWave(25)) {
+    //     waves.push([5, ['taunt', 'medic', 'tank', 50], ['faster', 50]]);
+    //     waves.push([5, ['taunt', 'faster', 'faster', 'faster', 50]]);
+    //     waves.push([
+    //         10, ['taunt', 'tank', 'tank', 'tank', 50],
+    //         ['faster', 50]
+    //     ]);
+    // }
+    // if (isWave(30)) {
+    //     waves.push([5, ['taunt', 'faster', 'faster', 'faster', 50]]);
+    //     waves.push([5, ['taunt', 'tank', 'tank', 'tank', 50]]);
+    //     waves.push([5, ['taunt', 'medic', 'tank', 'tank', 50]]);
+    //     waves.push([1, ['faster', 200]]);
+    // }
+    // if (isWave(35)) {
+    //     waves.push([0, ['taunt', 'faster', 200]]);
+    // }
 
     return random(waves);
 }
@@ -700,9 +702,67 @@ function sell(t) {
     cash += t.sellPrice();
     t.kill();
 }
+// доб
+function setImage(t) {
+    let param = document.getElementById('imgTower');
+    switch (t) {
+        case 'plank':
+            param.src = "../towerdefense-main/img/tower.png";
+            break;
+        case 'PROplanks':
+            param.src = "../towerdefense-main/img/tower2.png";
+            break;
+        // ^ мои башни ^
+        case 'gun':
+            param.src = "../towerdefense-main/img/tower.png";
+            break;
+        case  'machineGun':
+            param.src = "../towerdefense-main/img/tower2.png";
+            break;
+        case 'laser':
+            param.src =  "../towerdefense-main/img/laserTower.png"
+            break;
+        case 'beamEmitter':
+                param.src =  "../towerdefense-main/img/laserTower2.png"
+                break;
+        case 'slow':
+            param.src = "../towerdefense-main/img/slowTower.png"
+            break;
+        case 'poison':
+                param.src = "../towerdefense-main/img/slowTower2.png"
+            break;
+        case 'sniper':
+            param.src = "../towerdefense-main/img/sniperTower.png"
+            break;
+        case 'railgun':
+                param.src = "../towerdefense-main/img/sniperTower2.png"
+                break;
+        case 'rocket':
+            param.src =  "../towerdefense-main/img/rocketTower.png"
+            break;
+        case 'missileSilo':
+                param.src =  "../towerdefense-main/img/rocketTower2.png"
+                break;
+        case 'bomb':
+            param.src =  "../towerdefense-main/img/bombTower.png"
+            break;
+        case 'clusterBomb':
+                param.src =  "../towerdefense-main/img/bombTower2.png"
+                break;
+        case 'tesla':
+            param.src =  "../towerdefense-main/img/tesla.png"
+            break;
+        case 'plasma':
+                param.src =  "../towerdefense-main/img/tesla2.png"
+                break;
+    }
+}
 
 // Set a tower to place
 function setPlace(t) {
+  // добавленная
+setImage(t);
+
     towerType = t;
     toPlace = true;
     updateInfo(createTower(0, 0, tower[towerType]));
@@ -736,6 +796,7 @@ function updateInfo(t) {
     var buttons = document.getElementById('info-buttons');
     buttons.style.display = toPlace ? 'none' : 'flex';
     document.getElementById('info-div').style.display = 'block';
+    setImage(t.name);
 }
 
 // Update pause button
@@ -758,6 +819,9 @@ function upgrade(t) {
         selected.upgrade(t);
         selected.upgrades = t.upgrades ? t.upgrades : [];
         updateInfo(selected);
+  // добавленная
+setImage(t.name);
+
     }
 }
 

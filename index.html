@@ -24,21 +24,31 @@
   </head>
   <body>
     <header>
-      <h1>Village Defense</h1>
+      <h1>Tower Defens</h1>
     </header>
 
     <main>
       <div id="left-asides">
-        <aside id="map-aside">
-          <div class="group">
-            <p><button class="io" onclick="importMap(prompt('Input map string:'))">Import map (M)</button></p>
-            <p><button class="io" onclick="copyToClipboard(exportMap())">Export map (X)</button></p>
-          </div>
-          <p>Edit maps <a href="https://rsaihe.github.io/td-editor/" target="_blank">here</a>.</p>
-        </aside>
+      
         <aside id="store">
-          <h2>Store</h2>
+          <h2>Вооружение</h2>
+            <div id="info-div">
+            <h3 id="name"></h3>
+            <p><img id="imgTower" src="" alt="" width="83px" height="82px"></p>
+            <p id="cost"></p>
+            <p id="sellPrice"></p>
+            <p id="upPrice"></p>
+            <p id="damage"></p>
+            <p id="type"></p>
+            <p id="range"></p>
+            <p id="cooldown"></p>
+            <div class="horiz-buttons" id="info-buttons">
+              <button id="sell" onclick="if (selected) sell(selected)">Продать</button>
+              <button id="upgrade" onclick="if (selected && selected.upgrades.length > 0) upgrade(selected.upgrades[0])">Улучшить</button>
+            </div>
+          </div>
           <div class="group">
+            <p><button class="planks" onclick="setPlace('plank')">Забор</button></p>
             <p><button class="gun" onclick="setPlace('gun')">Башня</button></p>
             <p><button class="laser" onclick="setPlace('laser')">Лазерная башня</button></p>
             <p><button class="slow" onclick="setPlace('slow')">Замедлительная башняё</button></p>
@@ -46,8 +56,11 @@
             <p><button class="rocket" onclick="setPlace('rocket')">Ракетница</button></p>
             <p><button class="bomb" onclick="setPlace('bomb')">Бомбовая башня</button></p>
             <p><button class="tesla" onclick="setPlace('tesla')">Тесла</button></p>
-          </div>
+            </div>
         </aside>
+        <!-- <aside id="info">
+
+        </aside> -->
       </div>
 
       <div id="sketch-holder"></div>
@@ -84,23 +97,14 @@
             </select>
           </p>
         </aside>
-
-        <aside id="info">
-          <div id="info-div">
-            <h3 id="name"></h3>
-            <p id="cost"></p>
-            <p id="sellPrice"></p>
-            <p id="upPrice"></p>
-            <p id="damage"></p>
-            <p id="type"></p>
-            <p id="range"></p>
-            <p id="cooldown"></p>
-            <div class="horiz-buttons" id="info-buttons">
-              <button id="sell" onclick="if (selected) sell(selected)">Продать</button>
-              <button id="upgrade" onclick="if (selected && selected.upgrades.length > 0) upgrade(selected.upgrades[0])">Улучшить</button>
-            </div>
+  <!-- <aside id="map-aside">
+          <div class="group">
+            <p><button class="io" onclick="importMap(prompt('Input map string:'))">Import map (M)</button></p>
+            <p><button class="io" onclick="copyToClipboard(exportMap())">Export map (X)</button></p>
           </div>
-        </aside>
+          <p>Edit maps <a href="https://rsaihe.github.io/td-editor/" target="_blank">here</a>.</p>
+        </aside> -->
+
       </div>
     </main>
   </body>

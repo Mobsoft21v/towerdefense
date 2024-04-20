@@ -9,6 +9,24 @@ function createTower(x, y, template) {
 var tower = {};
 
 
+tower.planks = {
+    // Display
+    color: [255,0,0],
+    length: 0.0,
+    radius: 0.0,
+    secondary: [255,0,0],
+    // Misc
+    name: 'plank',
+    title: 'Деревянный забор',
+    // Stats
+    cooldownMax: 99999999,
+    cooldownMin: 99999,
+    cost: 25,
+    range: 0,
+    damageMin: 0,
+    damageMax: 0
+};
+
 tower.gun = {
     // Display
     color: [249, 191, 59],
@@ -17,7 +35,7 @@ tower.gun = {
     secondary: [149, 165, 166],
     // Misc
     name: 'gun',
-    title: 'Башня',
+    title: 'Защитная башня',
     // Stats
     cooldownMax: 18,
     cooldownMin: 8,
@@ -30,7 +48,7 @@ tower.gun = {
             color: [249, 105, 14],
             // Misc
             name: 'machineGun',
-            title: 'Машинная башня',
+            title: 'Защитная башня [PRO]',
             // Stats
             cooldownMax: 5,
             cooldownMin: 0,

@@ -36,9 +36,11 @@ class Enemy {
     }
 
     draw() {
+        push()
         stroke(0);
         fill(this.getColor());
         ellipse(this.pos.x, this.pos.y, this.radius * ts, this.radius * ts);
+        pop()
     }
 
     // Subtract damage amount from health, account for resistances, etc.

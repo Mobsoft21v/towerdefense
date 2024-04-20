@@ -47,7 +47,15 @@ enemy.fast = {
     speed: 2,
     // Methods
     draw: function() {
+        // const img = new Image();
+        // img.src = "../towerdefense-main/img/laserTower2.png";
+        // img.onload = ()=> ctx.drawImage(img, 0, 0); 
+        
+
+
+
         push();
+
         translate(this.pos.x, this.pos.y);
         rotate(this.vel.heading());
 
@@ -58,92 +66,102 @@ enemy.fast = {
         var side = 0.8 * ts / 2;
         quad(back, -side, 0, 0, back, side, front, 0);
         
-        pop();
-    }
-};
-
-enemy.strongFast = {
-    // Display
-    color: [30, 139, 195],
-    // Misc
-    name: 'strongFast',
-    // Stats
-    cash: 2,
-    health: 135,
-    speed: 2,
-    // Methods
-    draw: function() {
-        push();
-        translate(this.pos.x, this.pos.y);
-        rotate(this.vel.heading());
+        // const img = new Image();
+        // img.src = "../towerdefense-main/img/laserTower2.png";
+        // img.onload = function() { // дождаться загрузки img
+        // const pattern = context.createPattern(img, "repeat"); // фон 
+        // fillStyle = pattern; // стиль заполнения
+        // fillRect(10, 10, 400, 400); // рисует фон картинку
+        // //strokeRect(10, 10, 390, 390); // рисует контур
+        // };
         
-        stroke(0);
-		fill(this.getColor());
-        var back = -0.8 * ts / 3;
-        var front = back + 0.8 * ts;
-        var side = ts / 2;
-        quad(back, -side, 0, 0, back, side, front, 0);
+
+         pop();
+    }
+};
+
+// enemy.strongFast = {
+//     // Display
+//     color: [30, 139, 195],
+//     // Misc
+//     name: 'strongFast',
+//     // Stats
+//     cash: 2,
+//     health: 135,
+//     speed: 2,
+//     // Methods
+//     draw: function() {
+//         push();
+//         translate(this.pos.x, this.pos.y);
+//         rotate(this.vel.heading());
         
-        pop();
-    }
-};
-
-enemy.medic = {
-    // Display
-    color: [192, 57, 43],
-    radius: 0.7,
-    // Misc
-    name: 'medic',
-    // Stats
-    cash: 4,
-    health: 375,
-    immune: ['regen'],
-    // Methods
-    onTick: function() {
-        var affected = getInRange(this.pos.x, this.pos.y, 2, enemies);
-        for (var i = 0; i < affected.length; i++) {
-            affected[i].applyEffect('regen', 1);
-        }
-    }
-};
-
-enemy.stronger = {
-    // Display
-    color: [52, 73, 94],
-    radius: 0.8,
-    // Misc
-    name: 'stronger',
-    // Stats
-    cash: 4,
-    health: 375
-};
-
-enemy.faster = {
-    // Display
-    color: [249, 105, 14],
-    // Misc
-    name: 'faster',
-    // Stats
-    cash: 4,
-    health: 375,
-    resistant: ['explosion'],
-    speed: 3,
-    // Methods
-    draw: function() {
-        push();
-        translate(this.pos.x, this.pos.y);
-        rotate(this.vel.heading());
-
-        stroke(0);
-		fill(this.getColor());
-        var back = -0.7 * ts / 3;
-        var front = back + 0.7 * ts;
-        var side = 0.9 * ts / 2;
-        quad(back, -side, 0, 0, back, side, front, 0);
+//         stroke(0);
+// 		fill(this.getColor());
+//         var back = -0.8 * ts / 3;
+//         var front = back + 0.8 * ts;
+//         var side = ts / 2;
+//         quad(back, -side, 0, 0, back, side, front, 0);
         
-        pop();
-    }
-};
+//         pop();
+//     }
+// };
+
+// enemy.medic = {
+//     // Display
+//     color: [192, 57, 43],
+//     radius: 0.7,
+//     // Misc
+//     name: 'medic',
+//     // Stats
+//     cash: 4,
+//     health: 375,
+//     immune: ['regen'],
+//     // Methods
+//     onTick: function() {
+//         var affected = getInRange(this.pos.x, this.pos.y, 2, enemies);
+//         for (var i = 0; i < affected.length; i++) {
+//             affected[i].applyEffect('regen', 1);
+//         }
+//     }
+// };
+
+// enemy.stronger = {
+//     // Display
+//     color: [52, 73, 94],
+//     radius: 0.8,
+//     // Misc
+//     name: 'stronger',
+//     // Stats
+//     cash: 4,
+//     health: 375
+// };
+
+// enemy.faster = {
+//     // Display
+//     color: [249, 105, 14],
+//     // Misc
+//     name: 'faster',
+//     // Stats
+//     cash: 4,
+//     health: 375,
+//     resistant: ['explosion'],
+//     speed: 3,
+//     // Methods
+//     draw: function() {
+//         push();
+//         translate(this.pos.x, this.pos.y);
+//         rotate(this.vel.heading());
+
+//         stroke(0);
+// 		fill(this.getColor());
+//         var back = -0.7 * ts / 3;
+//         var front = back + 0.7 * ts;
+//         var side = 0.9 * ts / 2;
+//         quad(back, -side, 0, 0, back, side, front, 0);
+        
+//         pop();
+//     }
+// };
 
 enemy.tank = {
     // Display
@@ -179,37 +197,37 @@ enemy.tank = {
     }
 };
 
-enemy.taunt = {
-    // Display
-    color: [102, 51, 153],
-    radius: 0.8,
-    // Misc
-    name: 'taunt',
-    sound: 'taunt',
-    // Stats
-    cash: 8,
-    health: 1500,
-    immune: ['poison', 'slow'],
-    resistant: ['energy', 'physical'],
-    taunt: true,
-    // Methods
-    draw: function() {
-        push();
-        translate(this.pos.x, this.pos.y);
-        rotate(this.vel.heading());
+// enemy.taunt = {
+//     // Display
+//     color: [102, 51, 153],
+//     radius: 0.8,
+//     // Misc
+//     name: 'taunt',
+//     sound: 'taunt',
+//     // Stats
+//     cash: 8,
+//     health: 1500,
+//     immune: ['poison', 'slow'],
+//     resistant: ['energy', 'physical'],
+//     taunt: true,
+//     // Methods
+//     draw: function() {
+//         push();
+//         translate(this.pos.x, this.pos.y);
+//         rotate(this.vel.heading());
         
-        stroke(0);
-        fill(this.getColor());
-        var edge = this.radius * ts / 2;
-        rect(-edge, -edge, this.radius * ts, this.radius * ts);
-        stroke(232, 126, 4);
-        noFill();
-        rect(-0.3 * ts, -0.3 * ts, 0.6 * ts, 0.6 * ts);
-        rect(-0.2 * ts, -0.2 * ts, 0.4 * ts, 0.4 * ts);
+//         stroke(0);
+//         fill(this.getColor());
+//         var edge = this.radius * ts / 2;
+//         rect(-edge, -edge, this.radius * ts, this.radius * ts);
+//         stroke(232, 126, 4);
+//         noFill();
+//         rect(-0.3 * ts, -0.3 * ts, 0.6 * ts, 0.6 * ts);
+//         rect(-0.2 * ts, -0.2 * ts, 0.4 * ts, 0.4 * ts);
 
-        pop();
-    }
-};
+//         pop();
+//     }
+// };
 
 enemy.spawner = {
     // Display
