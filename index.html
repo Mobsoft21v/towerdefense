@@ -2,11 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="author" content="Amelia Clarke">
-    <title>Tower Defense</title>
+    <meta name="author" content="Bafax201">
+    <title>Base Defense</title>
     <link href="style.css" rel="stylesheet">
     <script src="scripts/lib/lz-string.min.js" defer></script>
     <script src="scripts/lib/p5.min.js" defer></script>
+    <script src="libraries/p5.svg.js" type="text/javascript"></script>
+    <!-- <script src="scripts/lib/p5.js" defer></script> -->
+    <!-- <script src="scripts/lib/p5.sound.js" defer></script> -->
     <script src="scripts/lib/p5.sound.min.js" defer></script>
     <script src="scripts/utils.js" defer></script>
     <script src="scripts/enemy.js" defer></script>
@@ -24,38 +27,32 @@
   </head>
   <body>
     <header>
-      <h1>Tower Defens</h1>
+      <h1>֎ Base Defense ֎</h1>
     </header>
 
     <main>
       <div id="left-asides">
       
         <aside id="store">
-          <h2>Вооружение</h2>
+          <h2>Ɵ Вооружение Ɵ</h2>
             <div id="info-div">
             <h3 id="name"></h3>
             <p><img id="imgTower" src="" alt="" width="83px" height="82px"></p>
-            <p id="cost"></p>
-            <p id="sellPrice"></p>
-            <p id="upPrice"></p>
-            <p id="damage"></p>
-            <p id="type"></p>
-            <p id="range"></p>
-            <p id="cooldown"></p>
+            <p class="txt" id="cost"></p>
+            <p class="txt" id="sellPrice"></p>
+            <p class="txt" id="upPrice"></p>
+            <p class="txt" id="damage"></p>
+            <p class="txt" id="type"></p>
+            <p class="txt" id="range"></p>
             <div class="horiz-buttons" id="info-buttons">
-              <button id="sell" onclick="if (selected) sell(selected)">Продать</button>
+              <button id="sell" onclick="if (selected) sell(selected)">Убрать</button>
               <button id="upgrade" onclick="if (selected && selected.upgrades.length > 0) upgrade(selected.upgrades[0])">Улучшить</button>
             </div>
           </div>
           <div class="group">
-            <p><button class="planks" onclick="setPlace('plank')">Забор</button></p>
+            <p><button class="planks up" onclick="setPlace('plank')">Забор</button></p>
             <p><button class="gun" onclick="setPlace('gun')">Башня</button></p>
-            <p><button class="laser" onclick="setPlace('laser')">Лазерная башня</button></p>
-            <p><button class="slow" onclick="setPlace('slow')">Замедлительная башняё</button></p>
-            <p><button class="sniper" onclick="setPlace('sniper')">Снайперская башня</button></p>
-            <p><button class="rocket" onclick="setPlace('rocket')">Ракетница</button></p>
-            <p><button class="bomb" onclick="setPlace('bomb')">Бомбовая башня</button></p>
-            <p><button class="tesla" onclick="setPlace('tesla')">Тесла</button></p>
+            <p><button class="laser down" onclick="setPlace('laser')">Метатель камней</button></p>
             </div>
         </aside>
         <!-- <aside id="info">
@@ -67,15 +64,15 @@
 
       <div id="right-asides">
         <aside id="status">
-          <p id="wave"></p>
-          <p id="health"></p>
-          <p id="cash"></p>
-          <div class="horiz-buttons">
+          <p class="txt" id="wave"></p>
+          <p class="txt" id="health"></p>
+          <p class="txt" id="cash"></p>
+          <div class="grid-buttons">
             <button id="pause" onclick="pause()">Start</button>
             <button onclick="resetGame()">Restart</button>
           </div>
           <p>
-            Map:
+             Карта:
             <select id="map">
               <option value="empty2">Empty (2)</option>
               <option value="empty3">Empty (3)</option>
@@ -96,15 +93,16 @@
               <option value="fork">Fork</option>
             </select>
           </p>
+          <p class="txt">| Пробел - пауза</p>
+          <p class="txt">| D - Удалить объект</p>
+          <p class="txt">| U - Улучшить объект</p>
+          <p class="txt">| V - Выключить звуки</p>
+          <p class="txt">| R - Перезапустить игру</p>
+          <p class="txt">|</p>
+          <p class="txt">| 1 - Поставить забор</p>
+          <p class="txt">| 2 - Поставить башню</p>
+          <p class="txt">| 3 - Поставить Метатель камней</p>
         </aside>
-  <!-- <aside id="map-aside">
-          <div class="group">
-            <p><button class="io" onclick="importMap(prompt('Input map string:'))">Import map (M)</button></p>
-            <p><button class="io" onclick="copyToClipboard(exportMap())">Export map (X)</button></p>
-          </div>
-          <p>Edit maps <a href="https://rsaihe.github.io/td-editor/" target="_blank">here</a>.</p>
-        </aside> -->
-
       </div>
     </main>
   </body>

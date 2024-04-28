@@ -1,20 +1,21 @@
 class Tower {
     constructor(col, row) {
         // Display
-        this.baseOnTop = true;      // render base over barrel
-        this.border = [0, 0, 0];    // border color
-        this.color = [0, 0, 0];     // main color
-        this.drawLine = true;       // draw line to enemy on attack
-        this.follow = true;         // follow target even when not firing
+        this.baseOnTop = true;      // render base over barrel - рендерить базу поверх бочки
+        this.border = [0, 0, 0];    // border color - цвет границы
+        this.color = [0, 0, 0];     // main color - основной цвет
+        this.drawLine = true;       // draw line to enemy on attack - подвести линию к противнику при атаке
+        this.follow = true;         // follow target even when not firing - следовать за целью, даже когда не стреляешь
         this.hasBarrel = true;
         this.hasBase = true;
-        this.length = 0.7;          // barrel length in tiles
-        this.radius = 1;            // radius in tiles
-        this.secondary = [0, 0, 0]; // secondary color
-        this.weight = 2;            // laser stroke weight
-        this.width = 0.3;           // barrel width in tiles
+        this.length = 0.7;          // barrel length in tiles - длина ствола в тайлах
+        this.radius = 1;            // radius in tiles - радиус в плитках
+        this.secondary = [0, 0, 0]; // secondary color - вторичный цвет
+        this.weight = 2;            // laser stroke weight - вес лазерного удара
+        this.width = 0.3;           // barrel width in tiles - ширина ствола в тайлах
+        this.rectangle = false;         // это просто квадрат 
 
-        // Misc
+        // Misc - Разное
         this.alive = true;
         this.name = 'tower';
         this.sound = null;          // sound to play on fire
@@ -37,12 +38,12 @@ class Tower {
         this.upgrades = [];
     }
 
-    // Adjust angle to point towards pixel position
+    // Отрегулируйте угол, чтобы указать на положение пикселя
     aim(x, y) {
         this.angle = atan2(y - this.pos.y, x - this.pos.x);
     }
 
-    // Deal damage to enemy
+    // Нанести урон врагу
     attack(e) {
         var damage = round(random(this.damageMin, this.damageMax));
         e.dealDamage(damage, this.type);
@@ -52,15 +53,15 @@ class Tower {
         this.onHit(e);
     }
 
-    // Check if cooldown is completed
+    // Проверьте, завершено ли восстановление
     canFire() {
         return this.cd === 0;
     }
 
     draw() {
-        // Draw turret base
+        // Draw turret base Нарисовать основание башни
         if (this.hasBase && !this.baseOnTop) this.drawBase();
-        // Draw barrel
+        // Draw barrel Нарисовать бочку
         if (this.hasBarrel) {
             push();
             translate(this.pos.x, this.pos.y);
@@ -68,30 +69,38 @@ class Tower {
             this.drawBarrel();
             pop();
         }
-        // Draw turret base
+        // Draw turret base Нарисовать основание башни
         if (this.hasBase && this.baseOnTop) this.drawBase();
+        // нарисовать квадрат
+        if (this.rectangle) this.drawRectangle();
     }
 
-    // Draw barrel of tower (moveable part)
+    // Draw barrel of tower (moveable part) Рисуем ствол башни (подвижная часть)
     drawBarrel() {
         stroke(this.border);
         fill(this.secondary);
         rect(0, -this.width * ts / 2, this.length * ts, this.width * ts);
     }
 
-    // Draw base of tower (stationary part)
+    // Draw base of tower (stationary part) Нарисуйте основание башни (стационарную часть)
     drawBase() {
         stroke(this.border);
         fill(this.color);
         ellipse(this.pos.x, this.pos.y, this.radius * ts, this.radius * ts);
     }
+    // нарисовать квадрат
+    drawRectangle() {
+        stroke(this.border);
+        fill(this.color);
+        rect(this.pos.x - (this.width * ts)/2, this.pos.y - (this.length * ts)/2, this.length * ts, this.width * ts);
+    }
 
-    // Returns damage range
+    // Returns damage range Возвращает диапазон урона
     getDamage() {
         return rangeText(this.damageMin, this.damageMax);
     }
 
-    // Returns average cooldown in seconds
+    // Returns average cooldown in seconds Возвращает среднее время восстановления в секундах.
     getCooldown() {
         return (this.cooldownMin + this.cooldownMax) / 120;
     }
@@ -104,7 +113,7 @@ class Tower {
         return !this.alive;
     }
 
-    // Functionality once entity has been targeted
+    // Functionality once entity has been targeted Функциональность после того, как объект стал мишенью
     onAim(e) {
         if (this.canFire() || this.follow) this.aim(e.pos.x, e.pos.y);
         if (stopFiring) return;
@@ -120,7 +129,7 @@ class Tower {
     }
 
     onCreate() {
-        this.cd = 0;                // current cooldown left
+        this.cd = 0;                // current cooldown left осталось текущее время восстановления
     }
 
     onHit(e) {}
@@ -130,12 +139,12 @@ class Tower {
         this.cd = cooldown;
     }
 
-    // Sell price
+    // Sell price Цена продажи
     sellPrice() {
         return floor(this.totalCost * sellConst);
     }
 
-    // Target correct enemy
+    // Target correct enemy Цельтесь в правильного врага
     target(entities) {
         entities = this.visible(entities);
         if (entities.length === 0) return;
@@ -150,7 +159,7 @@ class Tower {
         if (this.cd > 0) this.cd--;
     }
 
-    // Use template to set attributes
+    // Use template to set attributes - Используйте шаблон для установки атрибутов
     upgrade(template) {
         template = typeof template === 'undefined' ? {} : template;
         var keys = Object.keys(template);
@@ -161,7 +170,7 @@ class Tower {
         if (template.cost) this.totalCost += template.cost;
     }
 
-    // Returns array of visible entities out of passed array
+    // Returns array of visible entities out of passed array - Возвращает массив видимых объектов из переданного массива
     visible(entities) {
         return getInRange(this.pos.x, this.pos.y, this.range, entities);
     }

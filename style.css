@@ -22,13 +22,13 @@ body {
 /* Green borders, margins, and navy blue background */
 
 header, aside, #sketch-holder {
-    border: 1px solid #00E640;
+    border: 2px solid #66ea9d;
     border-radius: 10px;
     margin: 2px;
 }
 
 header, aside {
-    background-color: #013243;
+    background-color: #193835;
 }
 
 
@@ -126,13 +126,25 @@ button {
 }
 
 .horiz-buttons {
-    display: flex;
+    display: block;
     flex-direction: row;
     min-width: 100%;
 }
 
 .horiz-buttons button {
     display: block;
+    flex: 1;
+    text-align: center;
+}
+
+.grid-buttons {
+    display: grid;
+    flex-direction: row;
+    min-width: 100%;
+}
+
+.grid-buttons button {
+    display: grid;
     flex: 1;
     text-align: center;
 }
@@ -146,7 +158,7 @@ button {
 }
 
 #info-div {
-    display: none;
+    display: block;
     margin: 0;
 }
 
@@ -155,7 +167,7 @@ button {
 }
 
 #info-buttons {
-    display: none;
+    display: block;
 }
 
 #info-buttons button {
@@ -167,31 +179,29 @@ button {
 
 /* Misc. buttons */
 
-.io {
-    background-color: rgb(224, 130, 131);
-}
-
 #sell {
-    background-color: rgb(248, 148, 6);
+    background-color: rgb(82, 241, 127);
+    border-radius: 10px 10px 0px 0px;
 }
 
 #upgrade {
-    background-color: rgb(25, 181, 254);
+    background-color: rgb(93, 246, 228);
+    border-radius: 0px 0px 10px 10px;
 }
 
 
 /* Tower types */
 
 .planks {
-    background-color: rgb(255, 149, 0);
+    background-color: rgb(255, 215, 105);
 }
 
 .gun {
-    background-color: rgb(249, 191, 59);
+    background-color: rgb(255, 154, 46);
 }
 
 .laser {
-    background-color: rgb(25, 181, 254);
+    background-color: rgb(108, 144, 84);
 }
 
 .slow {
@@ -212,4 +222,18 @@ button {
 
 .tesla {
     background-color: rgb(255, 255, 0);
+}
+
+.up {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.down {
+    border-radius: 0px 0px 10px 10px;
+}
+
+/* Other */
+
+.txt {
+    margin: 5px;
 }

@@ -175,9 +175,9 @@ function empty(col, row) {
     return true;
 }
 
-// Return map string
+// Возвращаемая строка карты
 function exportMap() {
-    // Convert spawnpoints into a JSON-friendly format
+    // Преобразуйте точки появления (spawnpoints) в формат, совместимый с JSON.
     var spawns = [];
     for (var i = 0; i < spawnpoints.length; i++) {
         var s = spawnpoints[i];
@@ -203,7 +203,7 @@ function exportMap() {
     }));
 }
 
-// Get an empty tile
+// Получите пустую плитку (tile)
 function getEmpty() {
     while (true) {
         var t = randomTile();
@@ -211,7 +211,7 @@ function getEmpty() {
     }
 }
 
-// Find tower at specific tile, otherwise return null
+// Найдите башню на определенной плитке, в противном случае верните ноль.
 function getTower(col, row) {
     for (var i = 0; i < towers.length; i++) {
         var t = towers[i];
@@ -220,7 +220,7 @@ function getTower(col, row) {
     return null;
 }
 
-// Return map of visitability
+// Обратная карта посещаемости
 function getVisitMap(walkMap) {
     var frontier = [];
     var target = vts(exit);
@@ -228,7 +228,7 @@ function getVisitMap(walkMap) {
     var visited = {};
     visited[target] = true;
 
-    // Fill visited for every tile
+    // Заполнение посещено для каждой плитки
     while (frontier.length !== 0) {
         var current = frontier.shift();
         var t = stv(current);
@@ -246,7 +246,7 @@ function getVisitMap(walkMap) {
     return visited;
 }
 
-// Return walkability map
+// Карта обратной проходимости
 function getWalkMap() {
     var walkMap = [];
     for (var x = 0; x < cols; x++) {
@@ -258,7 +258,7 @@ function getWalkMap() {
     return walkMap;
 }
 
-// Load a map from a map string
+// Загрузить карту из строки карты
 function importMap(str) {
     try {
         custom = JSON.parse(LZString.decompressFromBase64(str));
@@ -267,7 +267,7 @@ function importMap(str) {
     } catch (err) {}
 }
 
-// Check if wave is at least min and less than max
+// Проверьте, равна ли волна хотя бы минимальному и меньше максимальному значению.
 function isWave(min, max) {
     if (typeof max === 'undefined') return wave >= min;
     return wave >= min && wave < max;
@@ -488,16 +488,16 @@ function randomTile() {
 function randomWave() {
     var waves = [];
 
-    if (isWave(0, 2)) {
+    if (isWave(0, 15)) {
         waves.push([40, ['weak', 50]]);
     }
-    if (isWave(0, 3)) {
+    if (isWave(5, 25)) {
         waves.push([20, ['strong', 25]]);
     }
-    if (isWave(0, 3)) {
+    if (isWave(10, 30)) {
         waves.push([30, ['fast', 25]]);
     }
-    if (isWave(0, 3)) {
+    if (isWave(20, 30)) {
         waves.push([30, ['tank', 25]]);
     }
     // if (isWave(3, 7)) {
@@ -707,10 +707,10 @@ function setImage(t) {
     let param = document.getElementById('imgTower');
     switch (t) {
         case 'plank':
-            param.src = "../towerdefense-main/img/tower.png";
+            param.src = "../towerdefense-main/img/plank.png";
             break;
-        case 'PROplanks':
-            param.src = "../towerdefense-main/img/tower2.png";
+        case 'plank2':
+            param.src = "../towerdefense-main/img/plank2.png";
             break;
         // ^ мои башни ^
         case 'gun':
@@ -761,7 +761,7 @@ function setImage(t) {
 // Set a tower to place
 function setPlace(t) {
   // добавленная
-setImage(t);
+    setImage(t);
 
     towerType = t;
     toPlace = true;
@@ -782,19 +782,15 @@ function updateInfo(t) {
     var name = document.getElementById('name');
     name.innerHTML = '<span style="color:rgb(' + t.color + ')">' + t.title +
     '</span>';
-    document.getElementById('cost').innerHTML = 'Цена: $' + t.totalCost;
+    document.getElementById('cost').innerHTML = 'Цена покупки: $' + t.totalCost;
     document.getElementById('sellPrice').innerHTML = 'Цена продажи: $' +
     t.sellPrice();
-    document.getElementById('upPrice').innerHTML = 'Цена апгрейда: ' +
-    (t.upgrades.length > 0 ? '$' + t.upgrades[0].cost : 'N/A');
+    document.getElementById('upPrice').innerHTML = 'Цена улучшения: ' +
+    (t.upgrades.length > 0 ? '$' + t.upgrades[0].cost : 'Нету');
     document.getElementById('damage').innerHTML = 'Урон: ' + t.getDamage();
-    document.getElementById('type').innerHTML = 'Тип: ' +
-    t.type.toUpperCase();
     document.getElementById('range').innerHTML = 'Дальность атаки: ' + t.range;
-    document.getElementById('cooldown').innerHTML = 'Задержка выстрелов: ' +
-    t.getCooldown().toFixed(2) + 'с';
     var buttons = document.getElementById('info-buttons');
-    buttons.style.display = toPlace ? 'none' : 'flex';
+    buttons.style.display = toPlace ? 'none' : 'block';
     document.getElementById('info-div').style.display = 'block';
     setImage(t.name);
 }
@@ -1111,23 +1107,18 @@ function keyPressed() {
             break;
         case 52:
             // 4
-            setPlace('sniper');
             break;
         case 53:
             // 5
-            setPlace('rocket');
             break;
         case 54:
             // 6
-            setPlace('bomb');
             break;
         case 55:
             // 7
-            setPlace('tesla');
             break;
         case 70:
             // F
-            showFPS = !showFPS;
             break;
         case 71:
             // G
@@ -1135,20 +1126,15 @@ function keyPressed() {
             break;
         case 72:
             // H
-            healthBar = !healthBar;
             break;
         case 77:
             // M
-            importMap(prompt('Введите ключ карты:'));
             break;
         case 80:
             // P
-            showEffects = !showEffects;
-            if (!showEffects) systems = [];
             break;
         case 81:
             // Q
-            stopFiring = !stopFiring;
             break;
         case 82:
             // R
@@ -1170,7 +1156,6 @@ function keyPressed() {
             break;
         case 87:
             // W
-            skipToNext = !skipToNext;
             break;
         case 88:
             // X

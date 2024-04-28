@@ -9,20 +9,23 @@ function createTower(x, y, template) {
 var tower = {};
 
 
-tower.planks = {
+tower.plank = {
     // Display
-    color: [255,0,0],
-    length: 0.0,
-    radius: 0.0,
+    color: [1,50,67],
+    border: [58,78,84],
+    length: 0,
+    radius: 0,
+    length: 0.7,
+    width: 0.7,
     secondary: [255,0,0],
+    cost: 25,
     // Misc
     name: 'plank',
     title: 'Деревянный забор',
-    // Stats
-    cooldownMax: 99999999,
-    cooldownMin: 99999,
-    cost: 25,
-    range: 0,
+    rectangle: true,
+    hasBase: false,
+    hasBarrel: false,
+    drawLine: false,
     damageMin: 0,
     damageMax: 0
 };

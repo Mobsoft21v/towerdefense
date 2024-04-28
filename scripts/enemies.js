@@ -16,13 +16,14 @@ var enemy = {};
 
 
 enemy.weak = {
-    // Display
+    //Display
     color: [189, 195, 199],
     // Misc
     name: 'weak',
     // Stats
     cash: 1,
-    health: 35
+    health: 35,
+    sourceimg: '../towerdefense-main/img/z1.png'
 };
 
 enemy.strong = {
