@@ -42,7 +42,7 @@ tower.gun = {
     // Stats
     cooldownMax: 18,
     cooldownMin: 8,
-    cost: 25,
+    cost: 50,
     range: 3,
     // Upgrades
     upgrades: [
@@ -74,7 +74,7 @@ tower.laser = {
     title: 'Лазерная башня',
     // Stats
     cooldownMax: 1,
-    cost: 75,
+    cost: 125,
     damageMax: 3,
     range: 2,
     type: 'energy',
@@ -90,7 +90,7 @@ tower.laser = {
             width: 0.35,
             // Misc
             name: 'beamEmitter',
-            title: 'Излучатель луча',
+            title: 'Лазерная башня [PRO]',
             // Stats
             cooldownMax: 0,
             cost: 200,

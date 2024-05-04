@@ -1,4 +1,4 @@
-new p5();   // p5.js global mode
+//new p5();   // p5.js global mode
 
 
 // Check if approximately at tile center

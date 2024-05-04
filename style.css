@@ -237,3 +237,7 @@ button {
 .txt {
     margin: 5px;
 }
+
+.dis-vis-no {
+    display: none;
+}

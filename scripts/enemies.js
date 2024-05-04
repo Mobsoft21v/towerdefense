@@ -23,7 +23,7 @@ enemy.weak = {
     // Stats
     cash: 1,
     health: 35,
-    sourceimg: '../towerdefense-main/img/z1.png'
+    sourceimg: 'textures/low_zombie.png'
 };
 
 enemy.strong = {
@@ -46,26 +46,27 @@ enemy.fast = {
     cash: 2,
     health: 75,
     speed: 2,
+    sourceimg: 'textures/speed_zombie.png'
     // Methods
-    draw: function() {
-        // const img = new Image();
-        // img.src = "../towerdefense-main/img/laserTower2.png";
-        // img.onload = ()=> ctx.drawImage(img, 0, 0); 
+    // draw: function() {
+    //     // const img = new Image();
+    //     // img.src = "../towerdefense-main/img/laserTower2.png";
+    //     // img.onload = ()=> ctx.drawImage(img, 0, 0); 
         
 
 
 
-        push();
+    //     push();
 
-        translate(this.pos.x, this.pos.y);
-        rotate(this.vel.heading());
+    //     translate(this.pos.x, this.pos.y);
+    //     rotate(this.vel.heading());
 
-        stroke(0);
-		fill(this.getColor());
-        var back = -0.55 * ts / 3;
-        var front = back + 0.55 * ts;
-        var side = 0.8 * ts / 2;
-        quad(back, -side, 0, 0, back, side, front, 0);
+    //     stroke(0);
+	// 	fill(this.getColor());
+    //     var back = -0.55 * ts / 3;
+    //     var front = back + 0.55 * ts;
+    //     var side = 0.8 * ts / 2;
+    //     quad(back, -side, 0, 0, back, side, front, 0);
         
         // const img = new Image();
         // img.src = "../towerdefense-main/img/laserTower2.png";
@@ -77,9 +78,9 @@ enemy.fast = {
         // };
         
 
-         pop();
+        //  pop();
     }
-};
+// };
 
 // enemy.strongFast = {
 //     // Display
@@ -176,26 +177,27 @@ enemy.tank = {
     immune: ['poison', 'slow'],
     resistant: ['energy', 'physical'],
     weak: ['explosion', 'piercing'],
+    sourceimg: 'textures/tank_zombie.png'
     // Methods
-    draw: function() {
-        push();
-        translate(this.pos.x, this.pos.y);
-        rotate(this.vel.heading());
+    // draw: function() {
+    //     push();
+    //     translate(this.pos.x, this.pos.y);
+    //     rotate(this.vel.heading());
         
-        stroke(0);
-        fill(this.getColor());
-        var front = this.radius * ts / 2;
-        var side = 0.7 * ts / 2;
-        var barrel = 0.15 * ts / 2;
-        var length = 0.7 * ts;
-        var curve = 0.2 * ts;
-        rect(-front, -side, front * 2, side * 2, curve);
-        fill(149, 165, 166);
-        rect(0, -barrel, length, barrel * 2);
-        ellipse(0, 0, 0.2 * ts * 2, 0.2 * ts * 2);
+    //     stroke(0);
+    //     fill(this.getColor());
+    //     var front = this.radius * ts / 2;
+    //     var side = 0.7 * ts / 2;
+    //     var barrel = 0.15 * ts / 2;
+    //     var length = 0.7 * ts;
+    //     var curve = 0.2 * ts;
+    //     rect(-front, -side, front * 2, side * 2, curve);
+    //     fill(149, 165, 166);
+    //     rect(0, -barrel, length, barrel * 2);
+    //     ellipse(0, 0, 0.2 * ts * 2, 0.2 * ts * 2);
 
-        pop();
-    }
+    //     pop();
+    // }
 };
 
 // enemy.taunt = {

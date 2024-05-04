@@ -9,25 +9,25 @@ var newTowers = [];
 var cols;
 var rows;
 var tileZoom = 2;
-var ts = 24;            // tile size
+var ts = 24;            // tile size  - размер заголовка
 var zoomDefault = ts;
 
-var particleAmt = 32;   // number of particles to draw per explosion
+var particleAmt = 32;   // number of particles to draw per explosion - количество частиц, которые нужно нарисовать за взрыв
 
 var tempSpawnCount = 40;
 
-var custom;             // custom map JSON
-var display;            // graphical display tiles
-var displayDir;         // direction display tiles are facing
+var custom;             // custom map JSON  - пользовательская карта JSON
+var display;            // graphical display tiles - плитки графического отображения
+var displayDir;         // direction display tiles are facing - плитки отображения направления обращены
                         // (0 = none, 1 = left, 2 = up, 3 = right, 4 = down)
-var dists;              // distance to exit
-var grid;               // tile type
+var dists;              // distance to exit - расстояние до выхода
+var grid;               // tile type - тип плитки
                         // (0 = empty, 1 = wall, 2 = path, 3 = tower,
                         //  4 = enemy-only pathing)
-var metadata;           // tile metadata
-var paths;              // direction to reach exit
-var visitMap;           // whether exit can be reached
-var walkMap;            // walkability map
+var metadata;           // tile metadata - метаданные плитки
+var paths;              // direction to reach exit - направление выхода
+var visitMap;           // whether exit can be reached - можно ли добраться до выхода
+var walkMap;            // walkability map - карта пешеходной доступности
 
 var exit;
 var spawnpoints = [];
@@ -38,7 +38,7 @@ var health;
 var maxHealth;
 var wave;
 
-var spawnCool;          // number of ticks between spawning enemies
+var spawnCool;          // number of ticks between spawning enemies - количество тиков между появлением врагов
 
 var bg;                 // background color
 var border;             // color to draw on tile borders
@@ -51,24 +51,24 @@ var sounds;             // dict of all sounds
 var boomSound;          // explosion sound effect
 
 // TODO add more functionality to god mode
-var godMode = false;    // make player immortal for test purposes
-var healthBar = true;   // display enemy health bar
-var muteSounds = false; // whether to mute sounds
-var paused;             // whether to update or not
-var randomWaves = true; // whether to do random or custom waves
-var scd;                // number of ticks until next spawn cycle
-var showEffects = true; // whether or not to display particle effects
-var showFPS = false;    // whether or not to display FPS
-var skipToNext = false; // whether or not to immediately start next wave
-var stopFiring = false; // whether or not to pause towers firing
+var godMode = false;    // make player immortal for test purposes - сделать игрока бессмертным для тестовых целей
+var healthBar = true;   // display enemy health bar - отображение шкалы здоровья врага
+var muteSounds = false; // whether to mute sounds - выключить ли звуки
+var paused;             // whether to update or not - обновлять или нет
+var randomWaves = true; // whether to do random or custom waves - делать ли случайные или пользовательские волны
+var scd;                // number of ticks until next spawn cycle - количество тиков до следующего цикла появления
+var showEffects = true; // whether or not to display particle effects - отображать или нет эффекты частиц
+var showFPS = false;    // whether or not to display FPS - показывать или нет FPS
+var skipToNext = false; // whether or not to immediately start next wave - стоит ли немедленно начинать следующую волну
+var stopFiring = false; // whether or not to pause towers firing - стоит ли приостанавливать стрельбу башен
 var toCooldown;         // flag to reset spawning cooldown
 var toPathfind;         // flag to update enemy pathfinding
 var toPlace;            // flag to place a tower
 var toWait;             // flag to wait before next wave
 var wcd;                // number of ticks until next wave
 
-var avgFPS = 0;         // current average of all FPS values
-var numFPS = 0;         // number of FPS values calculated so far
+var avgFPS = 0;         // current average of all FPS values - текущее среднее всех значений FPS
+var numFPS = 0;         // number of FPS values calculated so far - количество рассчитанных на данный момент значений FPS
 
 var minDist = 15;       // minimum distance between spawnpoint and exit
 var resistance = 0.5;   // percentage of damage blocked by resistance
@@ -114,6 +114,8 @@ function buy(t) {
 
 // Calculate and display current and average FPS
 function calcFPS() {
+
+    //frameRate(25);
     var fps = frameRate();
     avgFPS += (fps - avgFPS) / ++numFPS;
 
@@ -126,6 +128,7 @@ function calcFPS() {
     fill(255);
     var fpsText = 'FPS: ' + fps.toFixed(2) + '\nAvg: ' + avgFPS.toFixed(2);
     text(fpsText, 5, height - 25);
+    //console.log(fpsText);
 }
 
 // Check if all conditions for placing a tower are true
@@ -280,7 +283,7 @@ function loadMap() {
     var name = document.getElementById('map').value;
 
     health = 40;
-    cash = 5500;
+    cash = 150;
     
     if (name === 'custom' && custom) {
         // Grids
@@ -490,9 +493,6 @@ function randomWave() {
 
     if (isWave(0, 15)) {
         waves.push([40, ['weak', 50]]);
-    }
-    if (isWave(5, 25)) {
-        waves.push([20, ['strong', 25]]);
     }
     if (isWave(10, 30)) {
         waves.push([30, ['fast', 25]]);
@@ -802,7 +802,7 @@ function updatePause() {
 
 // Update game status display with wave, health, and cash
 function updateStatus() {
-    document.getElementById('wave').innerHTML = 'Волна ' + wave;
+    document.getElementById('wave').innerHTML = 'Волна ' + wave + '/30';
     document.getElementById('health').innerHTML = 'Здоровье: ' +
     health + '/' + maxHealth;
     document.getElementById('cash').innerHTML = '$' + cash;
@@ -858,32 +858,45 @@ function draw() {
         if (wcd > 0 && toWait) wcd--;
     }
 
-    // Draw basic tiles
+    // Draw basic tiles - отрисовка основных плиток
     for (var x = 0; x < cols; x++) {
         for (var y = 0; y < rows; y++) {
             var t = tiles[display[x][y]];
             if (typeof t === 'function') {
                 t(x, y, displayDir[x][y]);
             } else {
-                stroke(border, borderAlpha);
-                t ? fill(t) : noFill();
-                rect(x * ts, y * ts, ts, ts);
+                // stroke(border, borderAlpha);
+                // t ? fill(t) : noFill();
+                // rect(x * ts, y * ts, ts, ts);
+                const ctx = canvas.getContext("2d");
+                const img = new Image();
+                t ? img.src = 'textures/stena.png' : img.src = 'textures/trava.png';
+                ctx.drawImage(img, x * ts, y * ts, ts, ts); // img, x, y
             }
         }
     }
 
-    // Draw spawnpoints
+    // Рисование спавнеров зомби
     for (var i = 0; i < spawnpoints.length; i++) {
-        stroke(255);
-        fill(0, 230, 64);
+        const ctx = canvas.getContext("2d");
+        const img = new Image();
+        img.src = 'textures/spawner.png';
         var s = spawnpoints[i];
-        rect(s.x * ts, s.y * ts, ts, ts);
+        ctx.drawImage(img, s.x * ts, s.y * ts, ts, ts); // img, x, y
+        // stroke(255);
+        // fill(0, 230, 64);
+        
+       // rect(s.x * ts, s.y * ts, ts, ts);
     }
 
-    // Draw exit
-    stroke(255);
-    fill(207, 0, 15);
-    rect(exit.x * ts, exit.y * ts, ts, ts);
+    // Рисование базы
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    img.src = 'textures/base.png';
+    ctx.drawImage(img, exit.x * ts, exit.y * ts, ts, ts); // img, x, y
+    // stroke(255);
+    // fill(207, 0, 15);
+    // rect(exit.x * ts, exit.y * ts, ts, ts);
 
     // Draw temporary spawnpoints
     for (var i = 0; i < tempSpawns.length; i++) {
@@ -1051,7 +1064,15 @@ function draw() {
     newTowers = [];
 
     // If player is dead, reset game
-    if (health <= 0) resetGame();
+    if (health <= 0) {
+        alert('Вы проиграли!')
+        resetGame();
+    }
+
+    if (wave > 30) {
+        alert('Вы выиграли!')
+        resetGame();
+    }
 
     // Start next wave
     if (toWait && wcd === 0 || skipToNext && newEnemies.length === 0) {
@@ -1095,15 +1116,15 @@ function keyPressed() {
             break;
         case 49:
             // 1
-            setPlace('gun');
+            setPlace('plank');
             break;
         case 50:
             // 2
-            setPlace('laser');
+            setPlace('gun');
             break;
         case 51:
             // 3
-            setPlace('slow');
+            setPlace('laser');
             break;
         case 52:
             // 4

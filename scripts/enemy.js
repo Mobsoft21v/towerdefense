@@ -40,23 +40,90 @@ class Enemy {
         e.onStart(this);
         this.effects.push(e);
     }
+    
+    preload() {
+       // let localImg = loadImage("https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?q=80&w=2565&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    //    img = document.getElementById('imgTower');
+    //    img = loadImage(img); 
+   // img = p5.loadImage("./img/z1.png");
+   
+   //gif_createImg = createImg("./img/z1.png");
+
+    }
+
+    setup(p5, parent) {
+        // this.p5 = p5;
+        // p5.loadImage("./img/z1.png", img => {
+        //   this.img = img;
+        //   //p5.redraw(); // <- only if you're running with noLoop()
+        // // });
+        // background(200);
+
+        // // Create a p5.Image object.
+        // let img = createImage(66, 66);
+      
+        // // Load the image's pixels into memory.
+        // img.loadPixels();
+      
+        // // Set all the image's pixels to black.
+        // for (let x = 0; x < img.width; x += 1) {
+        //   for (let y = 0; y < img.height; y += 1) {
+        //     img.set(x, y, 0);
+        //   }
+        // }
+      
+        // // Update the image's pixel values.
+        // img.updatePixels();
+      
+        // // Draw the image.
+        // image(img, 17, 17);
+      }
 
     draw() {
         if (this.sourceimg !== null) {
-            // рабочий код рисования картинки в canvas с помощью библиотеки p5
+        //     // рабочий код рисования картинки в canvas с помощью библиотеки p5
         //     let img; 
-        //     let url = "https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?q=80&w=2565&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-        //  //  url = "https://www.svgrepo.com/show/200362/zombie.svg";
+
+
+        // img = document.getElementById('imgTower');
+        // //img = loadImage(img); 
+        //  let url = "https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?q=80&w=2565&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+        // //   // url = "https://i.pinimg.com/originals/01/01/77/010177ef67dab839767639e65a3365de.png";
         //     loadImage(url, img => { 
         //         image(img, 20, 40, 100, 100); 
         //       }
         //       ); 
 
         // рабочий код рисования картинки в canvas стандартным методом
-        const ctx = canvas.getContext("2d");
-        const img = new Image();
-        img.src = "img/z1.png";
-        img.onload = ()=> ctx.drawImage(img, this.pos.x, this.pos.y, 20,20); // img, x, y
+       const ctx = canvas.getContext("2d");
+       const img = new Image();
+       img.src = this.sourceimg;
+        ctx.drawImage(img, this.pos.x - 10, this.pos.y - 10, 20,20); // img, x, y
+    // img = document.getElementById('imgTower');
+    //    // img = loadImage(img);
+    //    if (img) {
+    //    p5.image(img, this.pos.x - 10, this.pos.y - 10, 20,20); 
+    //    }
+
+
+   // gif_createImg.position(0, 0);  
+
+        //frameRate(1);
+        //img.onload = ()=> ctx.drawImage(img, 0, 0, 402, 464, this.pos.x, this.pos.y, 20,20); // img, x, y
+        
+        // рабочий path svg
+        // const ctx = canvas.getContext("2d");
+        // let p = new Path2D('M442.276,160.943c-0.972-5.597-2.175-11.152-3.647-16.636C416.513,61.91,341.414,4.364,256,4.364        S95.488,61.91,73.348,144.391l-0.132,0.483c-1.405,5.297-2.557,10.663-3.495,16.073v25.235h372.461v-25.235l-0.003-0.004H442.276z'); //SVG путь
+        // ctx.fill(p); //черный квадрат
+        
+        //рабочий код загрузки изображения из интернета
+        // const ctx = canvas.getContext("2d");
+        // var img = new Image();
+        // img.onload = function() {
+        //     ctx.drawImage(img, 0, 0);
+        // }
+        // img.src = "http://upload.wikimedia.org/wikipedia/commons/d/d2/Svg_example_square.svg";
+
         //  img.onload = function() { // дождаться загрузки img
         //     const pattern = context.createPattern(img, "repeat"); // фон 
         //     ctx.fillStyle = pattern; // стиль заполнения

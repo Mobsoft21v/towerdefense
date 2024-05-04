@@ -88,11 +88,17 @@ class Tower {
         fill(this.color);
         ellipse(this.pos.x, this.pos.y, this.radius * ts, this.radius * ts);
     }
-    // нарисовать квадрат
+    // нарисовать забор
     drawRectangle() {
-        stroke(this.border);
-        fill(this.color);
-        rect(this.pos.x - (this.width * ts)/2, this.pos.y - (this.length * ts)/2, this.length * ts, this.width * ts);
+        // нарисовать векторный забор - рабочий код
+        // stroke(this.border);
+        // fill(this.color);
+        // rect(this.pos.x - (this.width * ts)/2, this.pos.y - (this.length * ts)/2, this.length * ts, this.width * ts);
+         // нарисовать забор из изображения
+        const ctx = canvas.getContext("2d");
+        const img = new Image();
+        img.src = "textures/zabor.png";
+        ctx.drawImage(img, this.pos.x - 10, this.pos.y - 10, 20,20); // img, x, y
     }
 
     // Returns damage range Возвращает диапазон урона

@@ -1,8 +1,8 @@
 var tiles = {
     // Basic
-    empty: null,
-    tower: [51, 110, 123],
-    wall: [1, 50, 67],
+    empty: null, // трава
+    tower: [51, 110, 123], // 
+    wall: [1, 50, 67], // препятствия
     // City
     grass: [30, 130, 76],
     lCorner: function(x, y, dir) {
